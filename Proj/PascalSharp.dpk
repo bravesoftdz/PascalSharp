@@ -31,6 +31,6 @@ requires
   rtl;
 
 contains
-  System.Convert in '..\Source\System.Convert.pas';
+  PS.System.Convert in '..\Source\PS.System.Convert.pas';
 
 end.

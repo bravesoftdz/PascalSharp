@@ -35,6 +35,8 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1049</VerInfo_Locale>
         <SanitizedProjectName>PascalSharp</SanitizedProjectName>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <GenPackage>true</GenPackage>
@@ -64,6 +66,8 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -77,7 +81,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="rtl.dcp"/>
-        <DCCReference Include="..\Source\System.Convert.pas"/>
+        <DCCReference Include="..\Source\PS.System.Convert.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -98,6 +102,16 @@
                 <Source>
                     <Source Name="MainSource">PascalSharp.dpk</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="D:\Repositories\delphi-live-template-engine\bin\BaseScriptingEngine.bpl">File D:\Repositories\delphi-live-template-engine\bin\BaseScriptingEngine.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="D:\Repositories\delphi-live-template-engine\bin\AssemblyInfoScriptingEngine.bpl">File D:\Repositories\delphi-live-template-engine\bin\AssemblyInfoScriptingEngine.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="D:\Repositories\delphi-live-template-engine\bin\DateTimeScriptEngine.bpl">File D:\Repositories\delphi-live-template-engine\bin\DateTimeScriptEngine.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\18.0\Bpl\CloudTemplates.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k240.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp240.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\maks4\Desktop\TeeGrid_SourceCode\Sources\..\Compiled\Delphi24.win32\Bin\DclVCLTeeGrid24.bpl">File C:\Users\maks4\Desktop\TeeGrid_SourceCode\Sources\..\Compiled\Delphi24.win32\Bin\DclVCLTeeGrid24.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\maks4\Desktop\TeeGrid_SourceCode\Sources\..\Compiled\Delphi24.win32\Bin\DclFMXTeeGrid24.bpl">File C:\Users\maks4\Desktop\TeeGrid_SourceCode\Sources\..\Compiled\Delphi24.win32\Bin\DclFMXTeeGrid24.bpl not found</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">

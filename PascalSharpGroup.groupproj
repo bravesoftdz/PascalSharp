@@ -9,6 +9,9 @@
         <Projects Include="Test\Tests.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\ms301-oktokit.pas\proj\OktokitPas.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="Tests:Make">
         <MSBuild Projects="Test\Tests.dproj" Targets="Make"/>
     </Target>
+    <Target Name="OktokitPas">
+        <MSBuild Projects="..\ms301-oktokit.pas\proj\OktokitPas.dproj"/>
+    </Target>
+    <Target Name="OktokitPas:Clean">
+        <MSBuild Projects="..\ms301-oktokit.pas\proj\OktokitPas.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OktokitPas:Make">
+        <MSBuild Projects="..\ms301-oktokit.pas\proj\OktokitPas.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="PascalSharp;Tests"/>
+        <CallTarget Targets="PascalSharp;Tests;OktokitPas"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="PascalSharp:Clean;Tests:Clean"/>
+        <CallTarget Targets="PascalSharp:Clean;Tests:Clean;OktokitPas:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="PascalSharp:Make;Tests:Make"/>
+        <CallTarget Targets="PascalSharp:Make;Tests:Make;OktokitPas:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
