@@ -32,6 +32,7 @@ requires
 
 contains
   PascalSharp.Convert in '..\Source\PascalSharp.Convert.pas',
-  PascalSharp.DateTimeOffset in '..\Source\PascalSharp.DateTimeOffset.pas';
+  PascalSharp.DateTimeOffset in '..\Source\PascalSharp.DateTimeOffset.pas',
+  PascalSharp.UriKind in '..\Source\PascalSharp.UriKind.pas';
 
 end.
