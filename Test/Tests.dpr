@@ -11,7 +11,8 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
-  System.Convert.Test in 'System.Convert.Test.pas';
+  Test.Version in 'Test.Version.pas',
+  PascalSharp.Version in '..\PascalSharp.Version.pas';
 
 var
   runner : ITestRunner;
