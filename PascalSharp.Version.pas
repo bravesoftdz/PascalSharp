@@ -7,6 +7,7 @@ Type
   private
     FMajor, FMinor, FBuild, FRevision: Word;
   public
+    Function IsEmpty: Boolean;
     Function ToString: String;
     Function ToArray: TArray<Word>;
     Class Function Parse(Const Input: String): TVersion; static;
@@ -21,8 +22,8 @@ Type
     class operator NotEqual(a: TVersion; b: TVersion): Boolean;
     class operator LessThan(a: TVersion; b: TVersion): Boolean;
     class operator LessThanOrEqual(a: TVersion; b: TVersion): Boolean;
+    class operator Implicit(a: String): TVersion;
 {$ENDREGION}
-    //
     property Major: Word read FMajor write FMajor;
     property Minor: Word read FMinor write FMinor;
     property Build: Word read FBuild write FBuild;
@@ -52,6 +53,52 @@ class function TVersion.Empty: TVersion;
 begin
   Result := TVersion.Create(0);
 end;
+
+class function TVersion.Parse(const Input: String): TVersion;
+var
+  raw: TArray<String>;
+begin
+  raw := Input.Split(['.', ','], TStringSplitOptions.ExcludeEmpty);
+  case Length(raw) of
+    0:
+      Result := TVersion.Empty;
+    1:
+      Result := TVersion.Create(raw[0].ToInteger);
+    2:
+      Result := TVersion.Create(raw[0].ToInteger, raw[1].ToInteger);
+    3:
+      Result := TVersion.Create(raw[0].ToInteger, raw[1].ToInteger, raw[2].ToInteger);
+    4:
+      Result := TVersion.Create(raw[0].ToInteger, raw[1].ToInteger, raw[2].ToInteger,
+        raw[3].ToInteger);
+  end;
+end;
+
+class operator TVersion.Implicit(a: String): TVersion;
+begin
+  Result := TVersion.Parse(a);
+end;
+
+function TVersion.IsEmpty: Boolean;
+begin
+  Result := Self = TVersion.Empty;
+end;
+
+function TVersion.ToArray: TArray<Word>;
+begin
+  Result := [Major, Minor, Build, Revision];
+end;
+
+function TVersion.ToString: String;
+begin
+  Result := string.Join('.', [Major, Minor]);
+  if (Build > 0) and (Revision > 0) then
+    Result := string.Join('.', [Major, Minor, Build, Revision])
+  else if Build > 0 then
+    Result := string.Join('.', [Major, Minor, Build]);
+end;
+
+{$REGION 'Class operator'}
 
 class operator TVersion.Equal(a, b: TVersion): Boolean;
 begin
@@ -93,45 +140,8 @@ end;
 
 class operator TVersion.NotEqual(a, b: TVersion): Boolean;
 begin
-  Result := //
-    (a.Major <> b.Major) or //
-    (a.Minor <> b.Minor) or //
-    (a.Build <> b.Build) or //
-    (a.Revision <> b.Revision);
+  Result := NOT(a = b);
 end;
-
-class function TVersion.Parse(const Input: String): TVersion;
-var
-  raw: TArray<String>;
-begin
-  raw := Input.Split(['.', ','], TStringSplitOptions.ExcludeEmpty);
-  case Length(raw) of
-    0:
-      Result := TVersion.Empty;
-    1:
-      Result := TVersion.Create(raw[0].ToInteger);
-    2:
-      Result := TVersion.Create(raw[0].ToInteger, raw[1].ToInteger);
-    3:
-      Result := TVersion.Create(raw[0].ToInteger, raw[1].ToInteger, raw[2].ToInteger);
-    4:
-      Result := TVersion.Create(raw[0].ToInteger, raw[1].ToInteger, raw[2].ToInteger,
-        raw[3].ToInteger);
-  end;
-end;
-
-function TVersion.ToArray: TArray<Word>;
-begin
-  Result := [Major, Minor, Build, Revision];
-end;
-
-function TVersion.ToString: String;
-begin
-  Result := string.Join('.', [Major, Minor]);
-  if (Build > 0) and (Revision > 0) then
-    Result := string.Join('.', [Major, Minor, Build, Revision])
-  else if Build > 0 then
-    Result := string.Join('.', [Major, Minor, Build]);
-end;
+{$ENDREGION}
 
 end.

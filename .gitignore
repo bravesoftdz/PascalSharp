@@ -64,3 +64,7 @@ __recovery/
 
 # Castalia statistics file (since XE7 Castalia is distributed with Delphi)
 *.stat
+Test/dunitx-results.xml
+Test/bin/TestInsightSettings.ini
+Test/bin/dunitx-results.xml
+Test/Tests.otares

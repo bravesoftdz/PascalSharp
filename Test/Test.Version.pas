@@ -4,14 +4,20 @@ interface
 
 uses
   PascalSharp.Version,
+  PascalSharp.Version.Ext,
   DUnitX.TestFramework;
 
 type
 
   [TestFixture]
   TTestVersion = class(TObject)
-  private
   public
+    // [Test]
+    // [TestCase('Self', '0,1.2.3.4')]
+    // [TestCase('B', '1,1.0.0.0')]
+    // procedure ExeVersion(a: Integer; b: String);
+    [Test]
+    procedure SelfVersion;
     [Test]
     [TestCase('A', '1,1.0')]
     [TestCase('B', '1,1.0.0.0')]
@@ -49,6 +55,13 @@ type
     [TestCase('C', '1,2,3,0,1.2.3')]
     [TestCase('D', '1,2,3,4,1.2.3.4')]
     procedure &Create(AMajor, AMinor, ABuild, ARevision: Integer; AResult: String);
+    [Test]
+    [TestCase('A', '0,True')]
+    [TestCase('B', '0.0,True')]
+    [TestCase('C', '0.0.0,True')]
+    [TestCase('D', '0.0.0.0,True')]
+    [TestCase('E', '0.0.0.1,False')]
+    procedure IsEmpty(AVersion: String; AEmpty: Boolean);
   end;
 
 implementation
@@ -75,6 +88,11 @@ begin
   Assert.IsTrue(TVersion.Create(a) >= TVersion.Create(b));
 end;
 
+procedure TTestVersion.IsEmpty(AVersion: String; AEmpty: Boolean);
+begin
+  Assert.AreEqual(TVersion.Create(AVersion).IsEmpty, AEmpty);
+end;
+
 procedure TTestVersion.LessThan(a, b: String);
 begin
   Assert.IsTrue(TVersion.Create(a) < TVersion.Create(b));
@@ -93,6 +111,11 @@ end;
 procedure TTestVersion.Parse(Input, Output: String);
 begin
   Assert.AreEqual(TVersion.Parse(Input).ToString, Output);
+end;
+
+procedure TTestVersion.SelfVersion;
+begin
+  Assert.AreEqual(TVersion.FileVersion(ParamStr(0)).ToString, TVersion.Create('1').ToString);
 end;
 
 initialization
