@@ -15,7 +15,8 @@ uses
   DUnitX.TestFramework,
   Test.Version in 'Test.Version.pas',
   PascalSharp.Version in '..\PascalSharp.Version.pas',
-  PascalSharp.Version.Ext in '..\PascalSharp.Version.Ext.pas';
+  PascalSharp.Version.Ext in '..\PascalSharp.Version.Ext.pas',
+  PascalSharp.DateTimeKind in '..\PascalSharp.DateTimeKind.pas';
 
 var
   runner: ITestRunner;
